@@ -1,0 +1,17 @@
+---
+- name: Install iptables-service Debian
+  apt:
+    name:
+      - iptables
+      - iptables-persistent
+    state: latest
+
+- name: Save default iptables rules in file Debian
+  template:
+    src: /etc/ansible/roles/firewall/template/iptables.j2
+    dest: /etc/iptables/rules.v4
+    owner: root
+    group: root
+    mode: '0600'
+  notify: Restart iptables service
+

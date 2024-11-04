@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: {{ semaphore_dbuser }}
+      POSTGRES_PASSWORD: {{ semaphore_dbpassword }}
+      POSTGRES_DB: {{ semaphore_db }}
+    volumes:
+      - semaphore_postgres:/var/lib/postgresql/data
+    networks:
+      - semaphore_network
+
+  semaphore:
+    image: semaphoreui/semaphore:{{ semaphore_version }}
+    ports:
+      - "3000:3000"
+    environment:
+      SEMAPHORE_DB_DIALECT: postgres
+      SEMAPHORE_DB_HOST: postgres
+      SEMAPHORE_DB_NAME: {{ semaphore_db }}
+      SEMAPHORE_DB_USER: {{ semaphore_dbuser }}
+      SEMAPHORE_DB_PASS: {{ semaphore_dbpassword }}
+      SEMAPHORE_ADMIN: {{ semaphore_admin }}
+      SEMAPHORE_ADMIN_PASSWORD: {{ semaphore_password }}
+      SEMAPHORE_ADMIN_NAME: {{ semaphore_name }}
+      SEMAPHORE_ADMIN_EMAIL: {{ semaphore_email }}
+    volumes:
+      - semaphore_data:/var/lib/semaphore
+      - semaphore_config:/etc/semaphore
+      - semaphore_tmp:/tmp/semaphore
+    networks:
+      - semaphore_network
+
+volumes:
+  semaphore_data:
+  semaphore_config:
+  semaphore_tmp:
+  semaphore_postgres:
+
+networks:
+  semaphore_network:
+    driver: bridge

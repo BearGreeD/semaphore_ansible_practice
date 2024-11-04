@@ -1,0 +1,20 @@
+---
+remote_user: vagrant
+
+semaphore_deployment_method: systemd # systemd or docker_compose
+
+semaphore_db: semaphore
+semaphore_dbuser: semaphoreuser
+semaphore_dbpassword: semaphorepassword
+
+semaphore_admin: admin
+semaphore_name: admin
+semaphore_email: admin@test.ru
+semaphore_password: adminpassword
+
+semaphore_version: v2.10.32
+
+firewall_ports:
+  - 22
+  - 80
+  - 3000

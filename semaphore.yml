@@ -1,0 +1,16 @@
+---
+
+# ansible-playbook semaphore.yml -i hosts --extra-vars "target=host"
+
+- hosts: "{{ target }}"
+  become: true
+  remote_user: "{{ remote_user }}"
+  vars_files: vars.yml
+  roles:
+    - system
+
+    - firewall
+
+    - { role: docker, when: semaphore_deployment_method == "docker_compose" }
+
+    - { role: docker-compose, when: semaphore_deployment_method == "docker_compose" }

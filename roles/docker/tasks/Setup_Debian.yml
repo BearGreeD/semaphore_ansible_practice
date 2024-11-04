@@ -1,0 +1,38 @@
+---
+- name: Install Docker dependencies on Debian
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: Add Docker GPG key on Debian
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker repository on Debian
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_lsb.codename }} stable"
+    state: present
+
+- name: Install Docker on Debian
+  apt:
+    name: docker-ce
+    state: present
+
+- name: Ensure Docker service is started and enabled
+  systemd:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Install Docker Compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/v2.10.0/docker-compose-{{ ansible_system }}-x86_64"
+    dest: /usr/local/bin/docker-compose
+    mode: '0755'

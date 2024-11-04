@@ -1,0 +1,19 @@
+---
+- name: Update package list and upgrade all packages
+  block:
+    - name: Update and upgrade on Debian
+      apt:
+        update_cache: yes
+        upgrade: dist
+      when: ansible_os_family == "Debian"
+
+    - name: Update and upgrade on CentOS
+      yum:
+        name: "*"
+        state: latest
+      when: ansible_os_family == "RedHat"
+
+    - name: Install GPG
+      yum:
+        name: gnupg2
+        state: latest

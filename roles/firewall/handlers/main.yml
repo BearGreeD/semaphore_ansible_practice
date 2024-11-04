@@ -1,0 +1,6 @@
+---
+- name: Restart iptables service
+  systemd:
+    name: iptables
+    state: restarted
+

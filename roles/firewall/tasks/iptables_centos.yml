@@ -1,0 +1,16 @@
+---
+- name: Stop firewalld systemd
+  systemd:
+    name: firewalld
+    state: stopped
+    enabled: false
+
+- name: Save default iptables rules in file CentOS
+  template:
+    src: /etc/ansible/roles/firewall/template/iptables.j2
+    dest: /etc/sysconfig/iptables
+    owner: root
+    group: root
+    mode: '0600'
+  notify: Restart iptables service
+

@@ -1,0 +1,2 @@
+debian ansible_host=192.168.240.51
+centos ansible_host=192.168.246.40

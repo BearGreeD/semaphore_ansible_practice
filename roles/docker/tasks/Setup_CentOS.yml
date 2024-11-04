@@ -1,0 +1,30 @@
+- name: Install Docker dependencies on CentOS
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+
+- name: Add Docker repository on CentOS
+  command: >
+    yum-config-manager --add-repo
+    https://download.docker.com/linux/centos/docker-ce.repo
+
+- name: Install Docker on CentOS
+  yum:
+    name: docker-ce
+    state: present
+
+- name: Ensure Docker service is started and enabled
+  systemd:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Install Docker Compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/v2.10.0/docker-compose-{{ ansible_system }}-x86_64"
+    dest: /usr/local/bin/docker-compose
+    mode: '0755'

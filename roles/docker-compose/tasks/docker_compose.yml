@@ -1,0 +1,15 @@
+---
+- name: Create semaphore dir
+  file:
+    path: /opt/semaphore
+    state: directory
+
+- name: Copy Docker Compose file
+  template:
+    src: /etc/ansible/roles/docker-compose/template/docker-compose.yml.j2
+    dest: /opt/semaphore/docker-compose.yml
+
+- name: Start Docker Compose services
+  command: docker-compose up -d
+  args:
+    chdir: /opt/semaphore
