@@ -11,6 +11,13 @@
 
     - firewall
 
+    - { role: postgresql, when: semaphore_deployment_method == "systemd" } 
+
+    - { role: semaphore, when: semaphore_deployment_method == "systemd" }
+
     - { role: docker, when: semaphore_deployment_method == "docker_compose" }
 
     - { role: docker-compose, when: semaphore_deployment_method == "docker_compose" }
+
+    - { role: systemd, when: semaphore_deployment_method == "systemd" }
+

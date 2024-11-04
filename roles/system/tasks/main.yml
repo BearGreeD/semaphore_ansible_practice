@@ -12,3 +12,10 @@
         name: "*"
         state: latest
       when: ansible_os_family == "RedHat"
+
+    - name: Install GPG
+      yum:
+        name:
+          - wget
+          - mc
+        state: latest

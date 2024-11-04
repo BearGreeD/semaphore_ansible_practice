@@ -1,0 +1,11 @@
+---
+- name: Semaphore runner started
+  systemd:
+    name: runner.service
+    state: started
+
+- name: Semaphore.service started
+  systemd:
+    name: semaphore.service
+    state: started
+

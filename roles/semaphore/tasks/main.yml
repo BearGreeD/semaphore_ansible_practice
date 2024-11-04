@@ -1,0 +1,8 @@
+---
+- name: Download Semaphore from GitHub
+  get_url:
+    url: "https://github.com/semaphoreui/semaphore/releases/download/v2.10.35/semaphore_2.10.35_linux_amd64.tar.gz"
+    dest: "/usr/local/bin/semaphore"
+    mode: "0755"
+
+

@@ -1,25 +1,25 @@
 ---
-# ssh user
+postgresql_db: semaphore
+postgresql_dbuser: semaphore
+postgresql_dbpassword: semaphorepass
+
+value_for_gpg: "yes"
+
 remote_user: vagrant
 
-# deployment method: docker_compose or systemd( not ready ;_; )
-semaphore_deployment_method: docker_compose
+semaphore_deployment_method: systemd # systemd or docker_compose
 
-# postgresql database
 semaphore_db: semaphore
 semaphore_dbuser: semaphoreuser
 semaphore_dbpassword: semaphorepassword
 
-# semaphore ui credentials
 semaphore_admin: admin
 semaphore_name: admin
 semaphore_email: admin@test.ru
 semaphore_password: adminpassword
 
-# semaphore version
 semaphore_version: v2.10.32
 
-# iptables ports
 firewall_ports:
   - 22
   - 80

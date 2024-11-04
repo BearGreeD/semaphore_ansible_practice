@@ -1,0 +1,26 @@
+---
+- name: Copy Semaphore systemd service file
+  copy:
+    src: semaphore.service.j2
+    dest: /etc/systemd/system/semaphore.service
+
+- name: Copy Semaphore runner systemd service file
+  copy:
+    src: runner.service.j2
+    dest: /etc/systemd/system/runner.service
+
+- name: Reload systemd daemon
+  systemd:
+    daemon_reload: true
+
+- name: Enable and start Semaphore runner service
+  systemd:
+    name: runner
+    enables: true
+  notify: Semaphore runner started
+
+- name: Enable and start Semaphore service
+  systemd:
+    name: semaphore
+    enabled: true
+  notify: Semaphore.service started
