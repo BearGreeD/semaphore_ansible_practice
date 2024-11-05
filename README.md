@@ -3,6 +3,7 @@
 OC : Debian or CentOS
 
 Непонятно как запустить установку semaphore без интерактивного мода ...
+roles -> semaphore -> tasks -> main.yml
 
 ansible-playbook semaphore.yml -i hosts --extra-vars "target=host"
 
