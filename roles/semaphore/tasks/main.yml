@@ -5,4 +5,8 @@
     dest: "/usr/local/bin/semaphore"
     mode: "0755"
 
+# Как избежать интерактивного мода ?
+#- name: Install Semaphore
+#  shell: /usr/local/bin/semaphore setup
+
 
